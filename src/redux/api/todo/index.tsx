@@ -2,7 +2,7 @@ import { api as index } from "..";
 
 const api = index.injectEndpoints({
   endpoints: (build) => ({
-    getTodo: build.query<TODO.getResponse, TODO.getRequest>({
+    getTodo: build.query<TODO.GetResponse, TODO.GetRequest>({
       query: () => ({
         url: "/a3a8d3e8733a61a3521a4cecee1362a4/todo-v1",
         method: "GET",
