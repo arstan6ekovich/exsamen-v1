@@ -1,4 +1,4 @@
 namespace TODO {
-  type getResponse = TodoType[];
-  type getRequest = void;
+  export type getResponse = TodoType[];
+  export type getRequest = void;
 }

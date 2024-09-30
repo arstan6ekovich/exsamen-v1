@@ -130,7 +130,7 @@ const TodoList = () => {
                     </form>
                   </div>
                 ) : (
-                  <div className={scss.TodosList}>
+                  <div className={scss.TodosList} key={el._id}>
                     <div>
                       <Image
                         width={200}
