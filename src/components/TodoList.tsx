@@ -10,7 +10,6 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import scss from "./TodoList.module.scss";
-import { ToastContainer, toast } from "react-toastify";
 
 interface TodoType {
   _id: number;
@@ -29,13 +28,12 @@ const TodoList = () => {
     register: registerEdit,
     handleSubmit: handleSubmitEdit,
     formState: { isSubmitting: isSubmittingEdit },
-    setValue,
   } = useForm<TodoType>();
   const [uploadFileQuery] = useUploadFileMutation();
   const [postTodoMutation] = usePostTodoMutation();
   const [deleteTodoMutation] = useDeleteTodoMutation();
   const [editTodoMutation] = useEditTodoMutation();
-  const { data , isLoading} = useGetTodoQuery();
+  const { data, isLoading } = useGetTodoQuery();
   const [isEdit, setIsEdit] = useState<number | null>(null);
   console.log(data);
 
@@ -100,70 +98,68 @@ const TodoList = () => {
           </form>
         </div>
         <div className={scss.Todos}>
-         {
-          isLoading ? (
+          {isLoading ? (
             <h1>Loading</h1>
           ) : (
             <>
-             {data?.map((el) =>
-            isEdit === el._id ? (
-              <div className={scss.editTodos}>
-                <form onSubmit={handleSubmitEdit(onSubmitEdit)}>
-                  <input
-                    type="file"
-                    {...registerEdit("image", { required: true })}
-                    placeholder="  Product Url"
-                  />
-                  <input
-                    type="text"
-                    {...registerEdit("title", { required: true })}
-                    placeholder="  Product Name"
-                  />
-                  <input
-                    type="text"
-                    {...registerEdit("description", { required: true })}
-                    placeholder="  Product Description"
-                  />
-                  {isSubmittingEdit ? (
-                    <button>Loading</button>
-                  ) : (
-                    <button type="submit">Submit</button>
-                  )}
-                  <button onClick={() => setIsEdit(null)}>Cancel</button>
-                </form>
-              </div>
-            ) : (
-              <div className={scss.TodosList}>
-                <div>
-                  <Image
-                    width={200}
-                    height={200}
-                    src={el.image}
-                    alt={el.title}
-                  />
-                  <h2>{el.title}</h2>
-                  <h5>{el.description}</h5>
-                  <div className={scss.buttons}>
-                    <button
-                      onClick={() => deleteTodoMutation(el._id)}
-                      className={scss.buttonRed}
-                    >
-                      Delete{" "}
-                    </button>
-                    <button
-                      onClick={() => setIsEdit(el._id)}
-                      className={scss.buttonGreen}
-                    >
-                      Edit
-                    </button>
+              {data?.map((el) =>
+                isEdit === el._id ? (
+                  <div className={scss.editTodos}>
+                    <form onSubmit={handleSubmitEdit(onSubmitEdit)}>
+                      <input
+                        type="file"
+                        {...registerEdit("image", { required: true })}
+                        placeholder="  Product Url"
+                      />
+                      <input
+                        type="text"
+                        {...registerEdit("title", { required: true })}
+                        placeholder="  Product Name"
+                      />
+                      <input
+                        type="text"
+                        {...registerEdit("description", { required: true })}
+                        placeholder="  Product Description"
+                      />
+                      {isSubmittingEdit ? (
+                        <button>Loading</button>
+                      ) : (
+                        <button type="submit">Submit</button>
+                      )}
+                      <button onClick={() => setIsEdit(null)}>Cancel</button>
+                    </form>
                   </div>
-                </div>
-              </div>
-            )
-          )}
+                ) : (
+                  <div className={scss.TodosList}>
+                    <div>
+                      <Image
+                        width={200}
+                        height={200}
+                        src={el.image}
+                        alt={el.title}
+                      />
+                      <h2>{el.title}</h2>
+                      <h5>{el.description}</h5>
+                      <div className={scss.buttons}>
+                        <button
+                          onClick={() => deleteTodoMutation(el._id)}
+                          className={scss.buttonRed}
+                        >
+                          Delete{" "}
+                        </button>
+                        <button
+                          onClick={() => setIsEdit(el._id)}
+                          className={scss.buttonGreen}
+                        >
+                          Edit
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )
+              )}
             </>
-          )
-         }
+          )}
         </div>
       </div>
     </div>
