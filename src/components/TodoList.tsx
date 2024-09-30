@@ -105,6 +105,8 @@ const TodoList = () => {
               {data?.map((el) =>
                 isEdit === el._id ? (
                   <div className={scss.editTodos} key={el._id}>
+                    {" "}
+                    {/* Добавил key */}
                     <form onSubmit={handleSubmitEdit(onSubmitEdit)}>
                       <input
                         type="file"
@@ -130,7 +132,9 @@ const TodoList = () => {
                     </form>
                   </div>
                 ) : (
-                  <div className={scss.TodosList}>
+                  <div className={scss.TodosList} key={el._id}>
+                    {" "}
+                    {/* Добавил key */}
                     <div>
                       <Image
                         width={200}
@@ -145,7 +149,7 @@ const TodoList = () => {
                           onClick={() => deleteTodoMutation(el._id)}
                           className={scss.buttonRed}
                         >
-                          Delete{" "}
+                          Delete
                         </button>
                         <button
                           onClick={() => setIsEdit(el._id)}
