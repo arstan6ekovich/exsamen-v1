@@ -1,5 +1,6 @@
 "use client";
 import {
+  useDeleteTodoAllMutation,
   useDeleteTodoMutation,
   useEditTodoMutation,
   useGetTodoQuery,
@@ -33,6 +34,7 @@ const TodoList = () => {
   const [postTodoMutation] = usePostTodoMutation();
   const [deleteTodoMutation] = useDeleteTodoMutation();
   const [editTodoMutation] = useEditTodoMutation();
+  const [deleteTodoAllMutation] = useDeleteTodoAllMutation();
   const { data, isLoading } = useGetTodoQuery();
   const [isEdit, setIsEdit] = useState<number | null>(null);
   console.log(data);
@@ -93,8 +95,13 @@ const TodoList = () => {
             {isSubmitting ? (
               <button>Loading</button>
             ) : (
-              <button type="submit">Submit</button>
+              <div className={scss.buttonsDelete}>
+                <button type="submit">Submit</button>
+              </div>
             )}
+            <button onClick={() => deleteTodoAllMutation(data)}>
+              Delete All
+            </button>
           </form>
         </div>
         <div className={scss.Todos}>

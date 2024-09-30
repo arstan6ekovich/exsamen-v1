@@ -40,6 +40,13 @@ const api = index.injectEndpoints({
       }),
       invalidatesTags: ["todo"],
     }),
+    deleteTodoAll: build.mutation({
+      query: () => ({
+        url: `/a3a8d3e8733a61a3521a4cecee1362a4/todo-v1`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["todo"],
+    }),
   }),
 });
 
@@ -49,4 +56,5 @@ export const {
   useUploadFileMutation,
   useDeleteTodoMutation,
   useEditTodoMutation,
+  useDeleteTodoAllMutation
 } = api;
