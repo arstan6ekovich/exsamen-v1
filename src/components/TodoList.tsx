@@ -104,11 +104,8 @@ const TodoList = () => {
             <>
               {data?.map((el) =>
                 isEdit === el._id ? (
-                  <div className={scss.editTodos}>
-                    <form
-                      onSubmit={handleSubmitEdit(onSubmitEdit)}
-                      key={el._id}
-                    >
+                  <div className={scss.editTodos} key={el._id}>
+                    <form onSubmit={handleSubmitEdit(onSubmitEdit)}>
                       <input
                         type="file"
                         {...registerEdit("image", { required: true })}
@@ -133,7 +130,7 @@ const TodoList = () => {
                     </form>
                   </div>
                 ) : (
-                  <div className={scss.TodosList} key={el._id}>
+                  <div className={scss.TodosList}>
                     <div>
                       <Image
                         width={200}
